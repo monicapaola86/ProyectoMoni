@@ -1,0 +1,100 @@
+﻿<link href="Estilo.css" rel="stylesheet"/>
+@{
+    var Id_Cliente = "";
+    var Nombre = "";
+    var Apellido = "";
+    var CedulaDeIdentidad = "";
+    var Direccion= "";
+    var Telefono = "";
+   
+    
+   if (IsPost)
+{
+
+    Id_Cliente = Request["Id_CLiente"];
+    Nombre=Request["Nombre"];
+    Apellido=Request["Apellido"];
+    CedulaDeIdentidad=Request["CedulaDeIdentidad"];
+    Direccion=Request["Direccion"];
+    Telefono=Request["Telefono"];
+       
+    Validation.RequireFields("Id_Cliente","Nombre", "Apellido", "CedulaDeIdentidad", "Direccion", "Telefono");
+   var SQLINSERT = "INSERT INTO Cliente (Id_Cliente, Nombre, Apellido, CedulaDeIdentidad, Direccion, Telefono) VALUES (@0, @1, @2,@3,@4,@5)";
+          
+
+
+if (Validation.IsValid())
+        {
+            try
+            {
+                var db = Database.Open("conn");
+                db.Execute(SQLINSERT, Id_Cliente, Nombre, Apellido, CedulaDeIdentidad, Direccion, Telefono);
+                Response.Write("Datos Guardados!");
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+        }
+    }
+}
+
+
+<p>BIENVENIDOS A LA PÁGINA</p>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<form method="post">
+    <fieldset>
+        <center>REGISTRAR NUEVOS CLIENTES</center>
+        <div>
+
+        </div>
+        <div>
+            <label>Codigo del Cliente: </label>
+            <input type="number" value="@Id_Cliente" name="Id_Cliente" />
+            @Html.ValidationMessage("Id_Cliente")
+
+        </div>
+
+        <div>
+            <label>Nombre:</label>
+            <input type="text" value="@Nombre" name="Nombre" />
+            @Html.ValidationMessage("Nombre")
+
+        </div>
+
+        <div>
+            <label>Apellido:</label>
+            <input type="text" value="@Apellido" name="Apellido" />
+            @Html.ValidationMessage("Apellido")
+
+        </div>
+
+        <div>
+            <label>CedulaDeIdentidad:</label>
+            <input type="text" value="@CedulaDeIdentidad" name="CedulaDeIdentidad" />
+            @Html.ValidationMessage("CedulaDeIdentidad")
+
+
+        </div>
+
+        <div>
+            <label>Direccion:</label>
+            <input type="text" value="@Direccion" name="Direccion" />
+            @Html.ValidationMessage("Direccion")
+        </div>
+
+        <div>
+            <label>Telefono:</label>
+            <input type="text" value="@Telefono" name="Telefono" />
+            @Html.ValidationMessage("Telefono")
+        </div>
+        <input type="submit" value="Guardar" />
+        <input type="button" value="Borrar" onclick="this.form.reset()" />
+        
+       
+    </fieldset>
+</form>
+
+
+

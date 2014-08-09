@@ -1,0 +1,20 @@
+﻿
+
+body {
+    background-color : rgba(178, 0, 255, 0.53); 
+    font-family : 'Lucida Sans'; 
+    color : black;
+    text-align:justify;
+    margin:6em;
+
+
+    } 
+    
+P { 
+font-size : 30pt; 
+font-family : arial,helvetica; 
+font-weight : normal; 
+text-align:center;
+border:groove;
+ 
+} 
